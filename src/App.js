@@ -67,153 +67,45 @@ const App = (props) => {
 
     const menu = [
         {
-            label: 'Favorites',
+            label: 'DashBoard',
             icon: 'pi pi-home',
-            items: [{ label: 'Dashboard', icon: 'pi pi-home', to: '/' }]
+            items: [{ label: 'Dashboard Link+', icon: 'pi pi-chart-bar', to: '/' }]
         },
         {
-            label: 'UI Kit',
-            icon: 'pi pi-star',
-            items: [
-                { label: 'Form Layout', icon: 'pi pi-id-card', to: '/formlayout' },
-                { label: 'Input', icon: 'pi pi-check-square', to: '/input' },
-                { label: 'Float Label', icon: 'pi pi-bookmark', to: '/floatlabel' },
-                { label: 'Invalid State', icon: 'pi pi-exclamation-circle', to: '/invalidstate' },
-                { label: 'Button', icon: 'pi pi-mobile', to: '/button', className: 'rotated-icon' },
-                { label: 'Table', icon: 'pi pi-table', to: '/table' },
-                { label: 'List', icon: 'pi pi-list', to: '/list' },
-                { label: 'Tree', icon: 'pi pi-share-alt', to: '/tree' },
-                { label: 'Panel', icon: 'pi pi-tablet', to: '/panel' },
-                { label: 'Overlay', icon: 'pi pi-clone', to: '/overlay' },
-                { label: 'Media', icon: 'pi pi-image', to: '/media' },
-                { label: 'Menu', icon: 'pi pi-bars', to: '/menu' },
-                { label: 'Message', icon: 'pi pi-comment', to: '/message' },
-                { label: 'File', icon: 'pi pi-file', to: '/file' },
-                { label: 'Chart', icon: 'pi pi-chart-bar', to: '/chart' },
-                { label: 'Misc', icon: 'pi pi-circle', to: '/misc' }
+            label: 'Link +',
+            icon: 'pi pi-link',
+            items:[
+                { label:'Dashboard Mantenimiento', icon: 'pi pi-cog', to: '/mantenimiento'},
+                { label:'Dashboard Operaciones', icon: 'pi pi-user-plus', to: '/operaciones'},
+                {label:'Informes Link+', icon:'pi pi-file-o', to: '/informeslink'},
             ]
         },
         {
-            label: 'PrimeBlocks',
-            icon: 'pi pi-prime',
-            items: [
-                { label: 'Free Blocks', icon: 'pi pi-eye', to: '/blocks', badge: 'NEW' },
-                { label: 'All Blocks', icon: 'pi pi-globe', url: 'https://www.primefaces.org/primeblocks-react', target: '_blank' }
+            label:'Rem',
+            icon:'pi pi-bolt',
+            items:[
+                { label:'Dashboard Rem', icon:'pi pi-chart-line', to: '/rem'},
+                { label:'Informes Rem', icon:'pi pi-file-o', to: '/informesrem'},
+
             ]
         },
         {
-            label: 'Utilities',
-            icon: 'pi pi-compass',
-            items: [
-                { label: 'Icons', icon: 'pi pi-prime', to: '/icons' },
-                { label: 'PrimeFlex', icon: 'pi pi-desktop', url: 'https://www.primefaces.org/primeflex', target: '_blank' }
+            label:'Registros',
+            icon:'pi - pi-file',
+            items:[
+                { label:'Diccionario Codigos Fusi', icon:'pi pi-exclamation-circle', to: '/diccionariofusi'},
+                { label:'Registro AWS', icon:'pi pi-cloud', to: '/registroaws'},
+
             ]
+
         },
-        {
-            label: 'Pages',
-            icon: 'pi pi-briefcase',
-            items: [
-                { label: 'Crud', icon: 'pi pi-pencil', to: '/crud' },
-                { label: 'Calendar', icon: 'pi pi-calendar-plus', to: '/calendar' },
-                { label: 'Timeline', icon: 'pi pi-calendar', to: '/timeline' },
-                { label: 'Landing', icon: 'pi pi-globe', url: 'assets/pages/landing.html', target: '_blank' },
-                { label: 'Login', icon: 'pi pi-sign-in', to: '/login' },
-                { label: 'Invoice', icon: 'pi pi-dollar', to: '/invoice' },
-                { label: 'Help', icon: 'pi pi-question-circle', to: '/help' },
-                { label: 'Error', icon: 'pi pi-times-circle', to: '/error' },
-                { label: 'Not Found', icon: 'pi pi-exclamation-circle', to: '/notfound' },
-                { label: 'Access Denied', icon: 'pi pi-lock', to: '/access' },
-                { label: 'Empty Page', icon: 'pi pi-circle', to: '/empty' }
-            ]
-        },
-        {
-            label: 'Hierarchy',
-            icon: 'pi pi-align-left',
-            items: [
-                {
-                    label: 'Submenu 1',
-                    icon: 'pi pi-align-left',
-                    items: [
-                        {
-                            label: 'Submenu 1.1',
-                            icon: 'pi pi-align-left',
-                            items: [
-                                { label: 'Submenu 1.1.1', icon: 'pi pi-align-left' },
-                                { label: 'Submenu 1.1.2', icon: 'pi pi-align-left' },
-                                { label: 'Submenu 1.1.3', icon: 'pi pi-align-left' }
-                            ]
-                        },
-                        {
-                            label: 'Submenu 1.2',
-                            icon: 'pi pi-align-left',
-                            items: [
-                                { label: 'Submenu 1.2.1', icon: 'pi pi-align-left' },
-                                { label: 'Submenu 1.2.2', icon: 'pi pi-align-left' }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    label: 'Submenu 2',
-                    icon: 'pi pi-align-left',
-                    items: [
-                        {
-                            label: 'Submenu 2.1',
-                            icon: 'pi pi-align-left',
-                            items: [
-                                { label: 'Submenu 2.1.1', icon: 'pi pi-align-left' },
-                                { label: 'Submenu 2.1.2', icon: 'pi pi-align-left' },
-                                { label: 'Submenu 2.1.3', icon: 'pi pi-align-left' }
-                            ]
-                        },
-                        {
-                            label: 'Submenu 2.2',
-                            icon: 'pi pi-align-left',
-                            items: [
-                                { label: 'Submenu 2.2.1', icon: 'pi pi-align-left' },
-                                { label: 'Submenu 2.2.2', icon: 'pi pi-align-left' }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Start',
-            icon: 'pi pi-download',
-            items: [
-                { label: 'Documentation', icon: 'pi pi-question', to: '/documentation' },
-                {
-                    label: 'Buy Now',
-                    icon: 'pi pi-shopping-cart',
-                    command: () => {
-                        window.location = 'https://www.primefaces.org/store';
-                    }
-                }
-            ]
-        }
+        { label:'Gps', icon:'pi pi-map-marker', to: '/gps'}
+
     ];
 
     const routes = [
-        { parent: 'Dashboard', label: 'Sales Dashboard' },
-        { parent: 'UI Kit', label: 'Form Layout' },
-        { parent: 'UI Kit', label: 'Input' },
-        { parent: 'UI Kit', label: 'Float Label' },
-        { parent: 'UI Kit', label: 'Invalid State' },
-        { parent: 'UI Kit', label: 'Button' },
-        { parent: 'UI Kit', label: 'Table' },
-        { parent: 'UI Kit', label: 'List' },
-        { parent: 'UI Kit', label: 'Panel' },
-        { parent: 'UI Kit', label: 'Tree' },
-        { parent: 'UI Kit', label: 'Overlay' },
-        { parent: 'UI Kit', label: 'Menu' },
-        { parent: 'UI Kit', label: 'Media' },
-        { parent: 'UI Kit', label: 'Message' },
-        { parent: 'UI Kit', label: 'File' },
-        { parent: 'UI Kit', label: 'Chart' },
-        { parent: 'UI Kit', label: 'Misc' },
-        { parent: 'UI Blocks', label: 'Blocks' },
-        { parent: 'Utilities', label: 'Icons' },
+        { parent: 'Dashboard', label: 'Dashboard Link +' },
+
         { parent: 'Pages', label: 'Crud' },
         { parent: 'Pages', label: 'Calendar' },
         { parent: 'Pages', label: 'Timeline' },

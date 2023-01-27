@@ -16,7 +16,7 @@ const AppBreadcrumb = (props) => {
     let items;
 
     if (location.pathname === '/') {
-        items = [{ label: 'Dashboard' }, { label: 'Sales Dashboard' }];
+        items = [{ label: 'Dashboard' }, { label: 'Dashboard Link+' }];
     } else if (!activeRoute.length) {
         items = [{ label: '' }, { label: '' }];
     } else {
