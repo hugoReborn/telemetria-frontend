@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 const Diccionario = () => {
+
+    useEffect(() => {
+
+
+    }, []);
+
     return (
-        <div className="grid">
-            <div className="col-12">
-                <div className="card">
-                    <h5>Empty Page</h5>
-                    <p>This is your empty page template to start building beautiful applications.</p>
+        <div className="layout-dashboard">
+            <div className="grid">
+                <div className="col-12 md:col-4">
+
                 </div>
             </div>
         </div>
+
     );
 };
 
