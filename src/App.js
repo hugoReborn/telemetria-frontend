@@ -34,6 +34,17 @@ import TimelineDemo from './pages/TimelineDemo';
 import Invoice from './pages/Invoice';
 import Help from './pages/Help';
 import EmptyPage from './pages/EmptyPage';
+import Gps from './pages/Gps';
+import DashboardMantenimiento from './pages/DashboardMantenimiento';
+import DashboardOperaciones from './pages/DashboardOperaciones';
+import DashboardRem from './pages/DashboardRem';
+import InformesLink from './pages/InformesLink';
+import DiccionarioFusi from './pages/DiccionarioFusi';
+import RegistroAWS from './pages/RegistroAWS';
+import InformesRem from './pages/InformesRem';
+import PerfilLink  from "./pages/PerfilLink";
+import PerfilRem from "./pages/PerfilRem";
+
 import BlocksDemo from './components/BlocksDemo';
 
 import PrimeReact from 'primereact/api';
@@ -99,12 +110,16 @@ const App = (props) => {
             ]
 
         },
-        { label:'Gps', icon:'pi pi-map-marker', to: '/gps'}
+        { label:'Gps', icon:'pi pi-map-marker', to: '/gps'},
+        { label:'Perfil Bus Link+', icon:'pi pi-user', to: '/perfillink'},
+        { label:'Perfil Bus Rem', icon:'pi pi-user', to: '/perfilrem'},
+
 
     ];
 
     const routes = [
-        { parent: 'Dashboard', label: 'Dashboard Link +' },
+        { parent: 'Dashboard', label: 'Informes Link +' },
+
 
         { parent: 'Pages', label: 'Crud' },
         { parent: 'Pages', label: 'Calendar' },
@@ -114,7 +129,17 @@ const App = (props) => {
         { parent: 'Pages', label: 'Help' },
         { parent: 'Pages', label: 'Empty' },
         { parent: 'Pages', label: 'Access' },
-        { parent: 'Start', label: 'Documentation' }
+        { parent: 'Start', label: 'Documentation' },
+        { parent: 'Pages', label: 'Gps'},
+        { parent: 'Pages', label: 'Mantenimiento'},
+        { parent: 'Pages', label: 'Operaciones'},
+        { parent: 'Pages', label: 'Rem'},
+        { parent: 'Pages', label: 'InformesLink'},
+        { parent: 'Pages', label: 'DiccionarioFusi'},
+        { parent: 'Pages', label: 'RegistroAws'},
+        { parent: 'Pages', label: 'InformesRem'},
+        { parent: 'Pages', label: 'PerfilBusLink' },
+        { parent: 'Pages', label: 'PerfilBusRem' },
     ];
 
     let rightMenuClick;
@@ -413,6 +438,16 @@ const App = (props) => {
                         <Route path="/invoice" element={<Invoice colorMode={props.colorScheme} location={location} />} />
                         <Route path="/empty" element={<EmptyPage />} />
                         <Route path="/timeline" element={<TimelineDemo />} />
+                        <Route path="/gps" element={<Gps />} />
+                        <Route path="/mantenimiento" element={<DashboardMantenimiento />} />
+                        <Route path="/operaciones" element={<DashboardOperaciones />} />
+                        <Route path="/rem" element={<DashboardRem />} />
+                        <Route path="/informeslink" element={<InformesLink />} />
+                        <Route path="/diccionariofusi" element={<DiccionarioFusi />} />
+                        <Route path="/registroaws" element={<RegistroAWS />} />
+                        <Route path="/informesrem" element={<InformesRem />} />
+                        <Route path="/perfilrem" element={<PerfilRem />} />
+                        <Route path="/perfillink" element={<PerfilLink />} />
                     </Routes>
                 </div>
 

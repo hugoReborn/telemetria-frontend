@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Operaciones = () => {
+const PerfilBusLink = () => {
     return (
         <div className="grid">
             <div className="col-12">
@@ -13,4 +13,4 @@ const Operaciones = () => {
     );
 };
 
-export default Operaciones;
+export default PerfilBusLink
