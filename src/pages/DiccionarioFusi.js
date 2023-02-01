@@ -22,11 +22,8 @@ const Diccionario = () => {
 
        })
 
-
-
-
-
     }, []);
+
     const header = (
         <div className="table-header">
             <h5 className="p-m-0">Tabla Codigos De Falla</h5>
