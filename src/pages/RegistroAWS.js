@@ -7,6 +7,7 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import axios from 'axios';
 
+
 const Aws = () => {
 
     const [aws, setAws] = useState([])
@@ -72,8 +73,8 @@ const Aws = () => {
                                        selection={selectedAws} onSelectionChange={e => setSelectedAws(e.value)} dataKey='bus'
                                        header={header}
                                        globalFilter={globalFilter}
-                                       paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                                       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" rows={9} rowsPerPageOptions={[9,20,50]}>
+                                       paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink "
+                                       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" rows={9} >
                                 <Column headerStyle={{width:'5rem'}} body={imageBodyTemplate}></Column>
                                 <Column headerStyle={{width:'10rem'}} field ='bus' header={'Bus'} ></Column>
                                 <Column headerStyle={{width:'30rem'}} field ='path_name' header={'Directorio AWS-S3'} ></Column>
@@ -97,15 +98,11 @@ const Aws = () => {
                         <h5 style={{textAlign:'center', color:'turquoise'}} >Archivos Por Decodificar</h5>
                         <h1 style={{fontSize:'5rem', textAlign:'center'}}>{dataAws.bus}</h1>
                         <h5 style={{textAlign:'center', color:'turquoise'}} >Ultimo Archivo Subido</h5>
-
-
-
-
                     </Card>
-
                 </div>
-
             </div>
+
+
 
 
 

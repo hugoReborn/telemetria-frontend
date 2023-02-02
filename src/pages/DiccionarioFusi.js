@@ -96,8 +96,8 @@ const Diccionario = () => {
                                            selection={selectedFusiCode} onSelectionChange={e => setSelectedFusiCode(e.value)} dataKey='id'
                                            header={header}
                                            globalFilter={globalFilter}
-                                           paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                                           currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" rows={9} rowsPerPageOptions={[9,20,50]}>
+                                           paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink "
+                                           currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" rows={9} >
                                     <Column body={imageBodyTemplate} headerStyle={{width:'5rem'}}> </Column>
                                     <Column field = 'fusicode' body={codeBodyTemplate} headerStyle={{width:'10rem'}} header = 'Codigo Fusi' sortable></Column>
                                     <Column field = 'description' header = 'Descripcion' headerStyle={{width:'30rem'}} ></Column>
