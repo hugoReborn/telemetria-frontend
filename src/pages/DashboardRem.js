@@ -66,7 +66,7 @@ const Rem = () => {
     return (
         <div className="grid">
 
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
 
                 <div className="card widget-overview-box widget-overview-box-1">
                     <span className="overview-title" style={{color:'turquoise'}}>TOTAL FLOTA REBORN</span>
@@ -75,7 +75,7 @@ const Rem = () => {
                             <div style={{backgroundColor:'#e0db3a'}} className="overview-badge flex justify-content-center align-items-center">
                                 <FaBus style={{color:'black', fontSize:'2rem'}} />
                             </div>
-                            <div className="overview-text">{totalBuses.total} buses.</div>
+                            <div style={{fontSize:'2rem'}} className="overview-text">{totalBuses.total} buses.</div>
                         </div>
 
                     </div>
@@ -88,7 +88,7 @@ const Rem = () => {
                             <div style={{backgroundColor:'#e0db3a'}} className="overview-badge flex justify-content-center align-items-center">
                                 <GiRoad style={{color:'black', fontSize:'2rem'}} />
                             </div>
-                            <div className="overview-text">{totalOdometer.total_odometer} km.</div>
+                            <div style={{fontSize:'2rem'}} className="overview-text">{totalOdometer.total_odometer} km.</div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@ const Rem = () => {
                             <div style={{backgroundColor:'#e0db3a'}} className="overview-badge flex justify-content-center align-items-center">
                                 <FaCarCrash style={{color:'black', fontSize:'2rem'}} />
                             </div>
-                            <div className="overview-text">{busFS.bus_fs} buses.</div>
+                            <div style={{fontSize:'2rem'}} className="overview-text">{busFS.bus_fs} buses.</div>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@ const Rem = () => {
                             <div style={{backgroundColor:'#e0db3a'}} className="overview-badge flex justify-content-center align-items-center">
                                 <RiBusWifiFill style={{color:'black', fontSize:'2rem'}} />
                             </div>
-                            <div className="overview-text">{operative.operative_buses} buses.</div>
+                            <div style={{fontSize:'2rem'}} className="overview-text">{operative.operative_buses} buses.</div>
                         </div>
                     </div>
                 </div>
@@ -122,12 +122,12 @@ const Rem = () => {
                         <span>Ultimo Mensaje De Falla</span><i className="pi pi-spin pi-exclamation-circle" style={{fontSize:'20px'}}></i>
                     </div>
                     <div className="content">
-                        <h3 style={{textAlign:'center'}}>Codigo</h3>
-                        <h1 style={{textAlign:'center', color:'turquoise'}}>{lastFusi.fusi_code}</h1>
-                        <h3 style={{textAlign:'center'}}>Descripcion</h3>
-                        <h5 style={{textAlign:'center', color:'turquoise'}}>{lastFusi.description}</h5>
-                        <h3 style={{textAlign:'center'}}>Fecha</h3>
-                        <h3 style={{textAlign:'center', color:'turquoise'}}>{lastFusi.timestamp}</h3>
+                        <h3 style={{textAlign:'center', color:'turquoise'}}>Codigo</h3>
+                        <h1 style={{textAlign:'center', color:'white'}}>{lastFusi.fusi_code}</h1>
+                        <h3 style={{textAlign:'center', color:'turquoise'}}>Descripcion</h3>
+                        <h5 style={{textAlign:'center', color:'white'}}>{lastFusi.description}</h5>
+                        <h3 style={{textAlign:'center', color:'turquoise'}}>Fecha</h3>
+                        <h3 style={{textAlign:'center', color:'white'}}>{lastFusi.timestamp}</h3>
 
                     </div>
 
