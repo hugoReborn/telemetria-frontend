@@ -6,6 +6,12 @@ import { FaCarCrash } from "react-icons/fa"
 import { FaBus } from "react-icons/fa"
 import { GiRoad } from "react-icons/gi";
 import { RiBusWifiFill } from "react-icons/ri";
+import { MdMobiledataOff } from "react-icons/md";
+import {Timeline} from "primereact/timeline";
+import {DataTable} from "primereact/datatable";
+import {Column} from "primereact/column";
+import {InputText} from "primereact/inputtext";
+import {Button} from "primereact/button";
 
 const Rem = () => {
 
@@ -18,6 +24,9 @@ const Rem = () => {
     const [busFS, setBusFS] = useState({});
     const [operative, setOperative] = useState({});
     const [lastFusi, setLastFusi] = useState({});
+    const [busNoData, setBusNoData] = useState([]);
+    const [globalFilter, setGlobalFilter] = useState(null);
+    const [selectedBus, setSelectedBus] = useState(null);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/other/avgsoc_fleet').then(response => {
@@ -57,17 +66,65 @@ const Rem = () => {
 
         axios.get('http://127.0.0.1:8000/status/lastfusicode_fleet/').then(response => {
             setLastFusi(response.data);
+        })
 
+        axios.get('http://127.0.0.1:8000/status/buslistnodata/').then(response => {
+            setBusNoData(response.data);
         })
 
 
     }, []);
 
+    const header = (
+        <div className="table-header">
+            <h5 className="p-m-0">Buses Sin Conexion</h5>
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Buscar..." />
+            </span>
+        </div>
+    );
+
+    const daysBodyTemplate = (rowData) => {
+        if(rowData.days === 2) {
+            return (
+                <Button className = 'p-button-rounded p-button-success mt-2'>{rowData.days} Dias</Button>
+
+            )
+
+        }else if(rowData.days > 2 && rowData.days < 5){
+            return (
+                <Button className = 'p-button-rounded p-button-warning mt-2'>{rowData.days} Dias</Button>
+            )
+        }else{
+            return (
+                <Button className = 'p-button-rounded p-button-info mt-2'>{rowData.days} Dias</Button>
+            )
+        }
+    }
+    const busBodyTemplate = (rowData) => {
+        return (
+            <span style={{color: 'turquoise'}}>{rowData.bus}</span>
+        )
+    }
+
+    const imageBusBodyTemplate = (rowData) => {
+        return (
+            <FaBus style={{color:'white', fontSize:'20px'}} />
+        )
+    }
+
+    const buttonBodyAction = (rowData) => {
+return (
+            <Button icon='pi pi-info' className = "p-button-rounded p-button-warning p-button-outlined"> </Button>
+        )
+    }
+
+
     return (
         <div className="grid">
 
-            <div className="col-12 md:col-2">
-
+            <div className="col-12 md:col-3">
                 <div className="card widget-overview-box widget-overview-box-1">
                     <span className="overview-title" style={{color:'turquoise'}}>TOTAL FLOTA REBORN</span>
                     <div className="flex justify-content-between">
@@ -80,7 +137,9 @@ const Rem = () => {
 
                     </div>
                 </div>
+            </div>
 
+            <div className="col-12 md:col-3">
                 <div className="card widget-overview-box widget-overview-box-1">
                     <span className="overview-title" style={{color:'turquoise'}}>KILOMETRAJE TOTAL FLOTA</span>
                     <div className="flex justify-content-between">
@@ -92,7 +151,9 @@ const Rem = () => {
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div className="col-12 md:col-3">
                 <div className="card widget-overview-box widget-overview-box-3">
                     <span className="overview-title" style={{color:'turquoise'}}>BUSES FUERA DE SERVICIO</span>
                     <div className="flex justify-content-between">
@@ -104,7 +165,9 @@ const Rem = () => {
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div className="col-12 md:col-3">
                 <div className="card widget-overview-box widget-overview-box-1">
                     <span className="overview-title" style={{color:'turquoise'}}>BUSES OPERATIVOS</span>
                     <div className="flex justify-content-between">
@@ -116,7 +179,9 @@ const Rem = () => {
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div className="col-12 md:col-2">
                 <div className="card widget-target">
                     <div className="card-header">
                         <span>Ultimo Mensaje De Falla</span><i className="pi pi-spin pi-exclamation-circle" style={{fontSize:'20px'}}></i>
@@ -128,16 +193,47 @@ const Rem = () => {
                         <h5 style={{textAlign:'center', color:'white'}}>{lastFusi.description}</h5>
                         <h3 style={{textAlign:'center', color:'turquoise'}}>Fecha</h3>
                         <h3 style={{textAlign:'center', color:'white'}}>{lastFusi.timestamp}</h3>
-
                     </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div className="col-12 md:col-4">
+                <div className="card widget-table">
+                    <div className="card-header">
+                        <span style={{color:'turquoise'}}>Buses Sin Conexion</span>
+                    </div>
+                    <DataTable value={busNoData}
+                               responsiveLayout='scroll'
+                               stripedRows
+                               selectionMode='single'
+                               size='large'
+                               header={header}
+                               globalFilter={globalFilter}
+                               paginator
+                               paginatorTemplate='CurrenPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
+                               currentPageReportTemplate='Showing {first} to {last} of {totalRecords} entries' rows={9}
+                               selection={selectedBus} onSelectionChange={e => setSelectedBus(e.value)} datakey='bus'>
+                        <Column headerStyle={{width:'5rem'}} body={imageBusBodyTemplate}></Column>
+                        <Column field="bus" header="Bus" headerStyle={{width:'5rem'}} body={busBodyTemplate} ></Column>
+                        <Column field='last_data' header='Fecha' headerStyle={{width:'8rem'}}></Column>
+                        <Column field='days' header='Dias' body={daysBodyTemplate} headerStyle={{width:'8rem'}} sortable></Column>
+                        <Column headerStyle={{width:'5rem'}} body={buttonBodyAction}></Column>
+
+
+
+
+                    </DataTable>
 
                 </div>
 
 
-
-
-
             </div>
+
 
 
 
