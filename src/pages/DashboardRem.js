@@ -15,10 +15,7 @@ import {Button} from "primereact/button";
 
 const Rem = () => {
 
-    const [avgSoc, SetAvgSoc] = useState({});
-    const [avgPressure, SetAvgPressure] = useState([]);
-    const [avgIsolation, SetAvgIsolation] = useState([]);
-    const [avgBattVolt24, SetAvgBattVolt24] = useState([]);
+
     const [totalBuses, SetTotalBuses] = useState({});
     const [totalOdometer, setTotalOdometer] = useState({});
     const [busFS, setBusFS] = useState({});
@@ -27,25 +24,60 @@ const Rem = () => {
     const [busNoData, setBusNoData] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [selectedBus, setSelectedBus] = useState(null);
+    const[avgSignals, setAvgSignals] = useState({});
+    const[historicalFusi, setHistoricalFusi] = useState({});
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/other/avgsoc_fleet').then(response => {
-            SetAvgSoc(response.data);
+
+        axios.get('http://127.0.0.1:8000/status/prom_fleet_signals/').then(response => {
+
+            const chartOptions = {
+                labels: ['Valores Promedio Señal'],
+
+                datasets: [
+                    {
+                        label:"Presion Aire",
+                        backgroundColor: '#974ae8',
+                        data: Object.values(response.data.avgpressure+'p'),
+                    },
+                    {
+                        label : 'Voltaje Bat. 24 V',
+                        backgroundColor: '#5035e8',
+                        data: Object.values(response.data.avgbatt24),
+                    },
+                    {
+                        label:'Temperatura de Baterias',
+                        backgroundColor: '#35e2e8',
+                        data: Object.values(response.data.avgbatttemp),
+                    },
+                    {
+                        label:'Temperatura Motor',
+                        backgroundColor: '#a52af7',
+                        data: Object.values(response.data.avgengine),
+                    }
+
+                ]
+            }
+            setAvgSignals(chartOptions);
         })
 
-        axios.get('http://127.0.0.1:8000/other/avgpressure_fleet').then(response => {
-            SetAvgPressure(response.data);
+        axios.get('http://127.0.0.1:8000/status/historical_fusi_chart/').then(response =>{
+            const pieOptions ={
+                labels: Object.values(response.data.labels),
+                datasets: [{
+                    data: Object.values(response.data.valores),
+                    backgroundColor: [ "#974ae8",
+                        "#35e2e8",
+                        "#a52af7"]
+
+                }]
 
 
-        }).catch(error =>{console.log(error)})
+            }
+            setHistoricalFusi(pieOptions);
 
-        axios.get('http://127.0.0.1:8000/electric/avgisolation_fleet/').then(response => {
-            SetAvgIsolation(response.data);
         })
 
-        axios.get('http://127.0.0.1:8000/electric/avgbattvolt24_fleet/').then(response => {
-            SetAvgBattVolt24(response.data);
-        })
 
         axios.get('http://127.0.0.1:8000/bus/total_buses/').then(response =>{
             SetTotalBuses(response.data);
@@ -113,6 +145,11 @@ const Rem = () => {
             <FaBus style={{color:'white', fontSize:'20px'}} />
         )
     }
+    const options = {
+        legend: {
+            display: true,
+        }
+    };
 
     const buttonBodyAction = (rowData) => {
 return (
@@ -184,12 +221,12 @@ return (
             <div className="col-12 md:col-2">
                 <div className="card widget-target">
                     <div className="card-header">
-                        <span>Ultimo Mensaje De Falla</span><i className="pi pi-spin pi-exclamation-circle" style={{fontSize:'20px'}}></i>
+                        <span>Último Mensaje De Falla</span><i className="pi pi-spin pi-exclamation-circle" style={{fontSize:'20px'}}></i>
                     </div>
                     <div className="content">
-                        <h3 style={{textAlign:'center', color:'turquoise'}}>Codigo</h3>
+                        <h3 style={{textAlign:'center', color:'turquoise'}}>Código</h3>
                         <h1 style={{textAlign:'center', color:'white'}}>{lastFusi.fusi_code}</h1>
-                        <h3 style={{textAlign:'center', color:'turquoise'}}>Descripcion</h3>
+                        <h3 style={{textAlign:'center', color:'turquoise'}}>Descripción</h3>
                         <h5 style={{textAlign:'center', color:'white'}}>{lastFusi.description}</h5>
                         <h3 style={{textAlign:'center', color:'turquoise'}}>Fecha</h3>
                         <h3 style={{textAlign:'center', color:'white'}}>{lastFusi.timestamp}</h3>
@@ -205,7 +242,7 @@ return (
             <div className="col-12 md:col-4">
                 <div className="card widget-table">
                     <div className="card-header">
-                        <span style={{color:'turquoise'}}>Buses Sin Conexion</span>
+                        <span style={{color:'turquoise'}}>Buses Sin Conexión</span>
                     </div>
                     <DataTable value={busNoData}
                                responsiveLayout='scroll'
@@ -223,15 +260,27 @@ return (
                         <Column field='last_data' header='Fecha' headerStyle={{width:'8rem'}}></Column>
                         <Column field='days' header='Dias' body={daysBodyTemplate} headerStyle={{width:'8rem'}} sortable></Column>
                         <Column headerStyle={{width:'5rem'}} body={buttonBodyAction}></Column>
-
-
-
-
                     </DataTable>
-
                 </div>
 
+            </div>
 
+            <div className="col-12 md:col-6">
+                <div className="card widget-country-graph">
+                    <i className="pi pi-spin pi-bolt" style={{color:"yellow", fontSize:'2rem'}} />
+                    <div className="country-title">Promedio Señales Flota</div>
+                    <div className="country-graph flex justify-content-center">
+                    </div>
+                    <div className="country-content">
+                        <Chart type="bar" data={avgSignals} options={options} />
+                    </div>
+                </div>
+            </div>
+
+            <div className="col-12 md:col-4">
+                <div className="card flex justify-content-center">
+                    <Chart type="pie" data={historicalFusi} style={{ position: 'relative', width: '40%' }} />
+                </div>
             </div>
 
 
@@ -245,52 +294,12 @@ return (
 
 
 
-            <div className="col-4">
-                <div className="card widget-target">
-                    <div className="card-header">
-                        <span>Soc - Presion - Aislacion - Voltaje Bat 24</span><i className="pi pi-chart-bar"></i>
-                    </div>
-                    <div className="content">
-                        <h3>Promedio Señales Flota</h3>
-                    </div>
-                    <div className="values">
-                        <div className="item">
-                            <span>Soc</span>
-                            <ProgressBar  style={{backgroundColor:'lightgray'}} value={avgSoc.avg_soc_fleet} showValue={false}></ProgressBar>
-                            <span className="day">{avgSoc.avg_soc_fleet}%</span>
-                        </div>
-
-                        <div className="item">
-                            <span>Presion</span>
-                            <ProgressBar style={{backgroundColor:'lightgray'}} value={avgPressure.avg_pressure_fleet*10} showValue={false}></ProgressBar>
-                            <span className="day">{avgPressure.avg_pressure_fleet} [Bar]</span>
-                        </div>
-
-                        <div className="item">
-                            <span>Aislacion</span>
-                            <ProgressBar style={{backgroundColor:'lightgray'}} value={avgIsolation.avg_isolation_fleet/100} showValue={false}></ProgressBar>
-                            <span className="day">{avgIsolation.avg_isolation_fleet} Ω</span>
-                        </div>
-
-                        <div className="item">
-                            <span>Bat.24V</span>
-                            <ProgressBar style={{backgroundColor:'lightgray'}} value={avgBattVolt24.avg_batt_24_fleet*3} showValue={false}></ProgressBar>
-                            <span  className="day">{avgBattVolt24.avg_batt_24_fleet}[v]</span>
-                        </div>
-
-
-
-                    </div>
-
-
-                </div>
 
 
 
 
 
 
-            </div>
         </div>
     );
 };
