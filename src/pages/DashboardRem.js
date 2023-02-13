@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {Chart} from "primereact/chart";
-import {ProgressBar} from "primereact/progressbar";
+
 import { FaCarCrash } from "react-icons/fa"
 import { FaBus } from "react-icons/fa"
 import { GiRoad } from "react-icons/gi";
 import { RiBusWifiFill } from "react-icons/ri";
-import { MdMobiledataOff } from "react-icons/md";
-import {Timeline} from "primereact/timeline";
+
+
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import {InputText} from "primereact/inputtext";
@@ -24,8 +24,10 @@ const Rem = () => {
     const [busNoData, setBusNoData] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [selectedBus, setSelectedBus] = useState(null);
-    const[avgSignals, setAvgSignals] = useState({});
-    const[historicalFusi, setHistoricalFusi] = useState({});
+    const [avgSignals, setAvgSignals] = useState({});
+    const [historicalFusi, setHistoricalFusi] = useState({});
+    const [selectedFusiCode, setSelectedFusiCode] = useState(null);
+    const [fusilist, setFusilist] = useState([]);
 
     useEffect(() => {
 
@@ -66,9 +68,7 @@ const Rem = () => {
                 labels: Object.values(response.data.labels),
                 datasets: [{
                     data: Object.values(response.data.valores),
-                    backgroundColor: [ "#974ae8",
-                        "#35e2e8",
-                        "#a52af7"]
+                    backgroundColor: [ "#974ae8", "#35e2e8", "#1428db", "#570b87","#9807f2","#07abad"]
 
                 }]
 
@@ -82,6 +82,10 @@ const Rem = () => {
         axios.get('http://127.0.0.1:8000/bus/total_buses/').then(response =>{
             SetTotalBuses(response.data);
 
+        })
+
+        axios.get('http://127.0.0.1:8000/status/fusicode_list/').then(response =>{
+            setFusilist(response.data);
         })
 
         axios.get('http://127.0.0.1:8000/other/totalodometer').then(response => {
@@ -106,6 +110,7 @@ const Rem = () => {
 
 
     }, []);
+
 
     const header = (
         <div className="table-header">
@@ -137,6 +142,12 @@ const Rem = () => {
     const busBodyTemplate = (rowData) => {
         return (
             <span style={{color: 'turquoise'}}>{rowData.bus}</span>
+        )
+    }
+
+    const percentageBodyTemplate = (rowData) => {
+        return (
+            <span style={{color: 'turquoise'}}>{rowData.total}</span>
         )
     }
 
@@ -278,9 +289,31 @@ return (
             </div>
 
             <div className="col-12 md:col-4">
-                <div className="card flex justify-content-center">
-                    <Chart type="pie" data={historicalFusi} style={{ position: 'relative', width: '40%' }} />
+                <div className="card widget-country-graph">
+                    <div className="country-title" style={{fontSize:"20px"}}>Registro Historico Flota Codigos Fusi</div>
+                    <div className="country-graph flex justify-content-center">
+                        <Chart type="doughnut" data={historicalFusi} style={{ position: 'relative', width: '70%' }} />
+                    </div>
+
+                    <div className="country-content">
+                        <DataTable
+                        value={fusilist}
+                        paginator={true}
+                        responsiveLayout='scroll'
+                        stripedRows
+                        selectionMode='single'
+                        paginatorTemplate='CurrenPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
+                        currentPageReportTemplate='Showing {first} to {last} of {totalRecords} entries' rows={9}
+                        selection={selectedFusiCode} onSelectionChange={e => setSelectedFusiCode(e.value)} datakey='id'>
+                            <Column field="dtc" header="Código" headerStyle={{width:'15rem', color:'turquoise'}} ></Column>
+                            <Column field="quantity" header="Repeticiones" headerStyle={{width:'15rem'}} sortable ></Column>
+                            <Column field="total" header="Porcentaje" body={percentageBodyTemplate} ></Column>
+
+                        </DataTable>
+
+                    </div>
                 </div>
+
             </div>
 
 

@@ -96,7 +96,7 @@ const App = (props) => {
             icon:'pi pi-bolt',
             items:[
                 { label:'Dashboard Rem', icon:'pi pi-chart-line', to: '/rem'},
-                { label:'Informes Rem', icon:'pi pi-file-o', to: '/informesrem'},
+                { label:'Partes Rem', icon:'pi pi-file-o', to: '/informesrem'},
 
             ]
         },
