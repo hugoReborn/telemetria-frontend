@@ -44,6 +44,7 @@ import RegistroAWS from './pages/RegistroAWS';
 import InformesRem from './pages/InformesRem';
 import PerfilLink  from "./pages/PerfilLink";
 import PerfilRem from "./pages/PerfilRem";
+import Fleet from "./pages/Fleet";
 
 import BlocksDemo from './components/BlocksDemo';
 
@@ -113,6 +114,7 @@ const App = (props) => {
         { label:'Gps', icon:'pi pi-map-marker', to: '/gps'},
         { label:'Perfil Bus Link+', icon:'pi pi-user', to: '/perfillink'},
         { label:'Perfil Bus Rem', icon:'pi pi-user', to: '/perfilrem'},
+        { label:'Flota Buses', icon:'pi pi-star', to:'/fleet'},
 
 
     ];
@@ -140,6 +142,7 @@ const App = (props) => {
         { parent: 'Pages', label: 'InformesRem'},
         { parent: 'Pages', label: 'PerfilBusLink' },
         { parent: 'Pages', label: 'PerfilBusRem' },
+        { parent: 'Pages', label: 'FlotaBuses' },
     ];
 
     let rightMenuClick;
@@ -448,6 +451,7 @@ const App = (props) => {
                         <Route path="/informesrem" element={<InformesRem />} />
                         <Route path="/perfilrem" element={<PerfilRem />} />
                         <Route path="/perfillink" element={<PerfilLink />} />
+                        <Route path="/fleet" element={<Fleet />} />
                     </Routes>
                 </div>
 

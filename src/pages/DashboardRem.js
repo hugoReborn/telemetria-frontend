@@ -245,11 +245,6 @@ return (
                 </div>
             </div>
 
-
-
-
-
-
             <div className="col-12 md:col-4">
                 <div className="card widget-table">
                     <div className="card-header">
@@ -273,7 +268,6 @@ return (
                         <Column headerStyle={{width:'5rem'}} body={buttonBodyAction}></Column>
                     </DataTable>
                 </div>
-
             </div>
 
             <div className="col-12 md:col-6">
@@ -308,11 +302,13 @@ return (
                             <Column field="dtc" header="Código" headerStyle={{width:'15rem', color:'turquoise'}} ></Column>
                             <Column field="quantity" header="Repeticiones" headerStyle={{width:'15rem'}} sortable ></Column>
                             <Column field="total" header="Porcentaje" body={percentageBodyTemplate} ></Column>
-
                         </DataTable>
-
                     </div>
                 </div>
+            </div>
+
+            <div className="col-12 md:col-4">
+
 
             </div>
 
