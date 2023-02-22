@@ -121,6 +121,8 @@ const Mantenimiento = () => {
         </div>
     );
 
+    console.log(openFusi.length)
+
 
 
 
@@ -155,6 +157,22 @@ const Mantenimiento = () => {
                         </div>
                     </div>
                 </div>
+
+                <div className="col-12 md:col-3">
+                    <div className="card widget-overview-box widget-overview-box-3">
+                        <span className="overview-title" style={{color:'turquoise'}}>CODIGOS FUSI ACTIVOS</span>
+                        <div className="flex justify-content-between">
+                            <div className="overview-detail flex justify-content-between">
+                                <div style={{backgroundColor:'#e0db3a'}} className="overview-badge flex justify-content-center align-items-center">
+                                    <i className="pi pi-exclamation-triangle" style={{'fontSize': '2em', color:'black'}}></i>
+                                </div>
+                                <div style={{fontSize:'2rem'}} className="overview-text">{openFusi.length} codigos.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div className="col-12 md:col-3">
                     <div className="card widget-overview-box widget-overview-box-1">
