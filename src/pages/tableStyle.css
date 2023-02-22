@@ -1,4 +1,16 @@
 
-.card{
+.card .criticalsoc{
 
+    color: #e32727;
 }
+
+.card .lowsoc{
+    font-weight: lighter;
+    color: #ffc400;
+}
+
+.card .normalsoc{
+
+    color: #f2f5f2;
+}
+
