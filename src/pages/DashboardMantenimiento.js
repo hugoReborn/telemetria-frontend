@@ -20,6 +20,7 @@ const Mantenimiento = () => {
     const [totalBuses, SetTotalBuses] = useState({});
     const [busFS, setBusFS] = useState({});
     const [totalOdometer, setTotalOdometer] = useState({});
+    const [openFusi, setOpenFusi] = useState([]);
 
 
     useEffect(() => {
@@ -38,6 +39,10 @@ const Mantenimiento = () => {
 
         axios.get('http://127.0.0.1:8000/other/totalodometer').then(response => {
             setTotalOdometer(response.data);
+        })
+
+        axios.get('http://127.0.0.1:8000/status/fusicodeopenlist/').then(response => {
+            setOpenFusi(response.data);
         })
     }, []);
 
@@ -192,6 +197,13 @@ const Mantenimiento = () => {
                 </div>
                 <div className="col-12 md:col-3">
                     <div className="card">
+                        <DataTable value={openFusi}>
+                            <Column field="fusi_code" header="Codigo" />
+                            <Column field="bus" header="Bus" />
+                            <Column field='timestamp' header="Fecha" />
+                            <Column field='estado' header="Estado" />
+                        </DataTable>
+
 
                     </div>
                 </div>
