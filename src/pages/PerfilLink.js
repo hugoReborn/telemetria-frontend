@@ -14,6 +14,9 @@ const PerfilBusLink = (props) => {
                     <h5>Empty Page</h5>
                     <p>This is your empty page{state.bus_name} tezxczxczxczxmplate to start building beautiful applications.</p>
                     <p>{state.soc}</p>
+                    <p>{state.odometer}</p>
+                    <p>{state.bus_name}</p>
+                    <p>{state.id}</p>
                 </div>
             </div>
         </div>
