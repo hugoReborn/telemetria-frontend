@@ -95,20 +95,11 @@ const InformesRem = () => {
                     <div>
                         <h5 className="mb-1">{item.azotador}</h5>
                         <h6 className="mt-0 mb-3" style={{color:"darkturquoise"}}>Total Partes : {item.cantidad}</h6>
-
                     </div>
                     <div className="template">
                         <Button label="Tecnico Rem" className="p-button-info" />
-
-
-
-
-
-
                     </div>
-
                 </div>
-
             </div>
 
         );
@@ -123,6 +114,8 @@ const InformesRem = () => {
     //console.log(parte)
     //console.log(date)
     //console.log(dropdownBus)
+
+    const seccionValues = ['fabrica', 'bus']
 
 
 
@@ -157,7 +150,7 @@ const InformesRem = () => {
                     <span>Componente en Falla</span>
                     <br/>
                     <br/>
-                    <span><Dropdown value=''  optionLabel="name" placeholder="Seleccione Componente" /></span><br/>
+                    <span><Dropdown value={seccionValues}  optionLabel="name" placeholder="Seleccione Seccion" /></span><br/>
                     <br/>
                     <span><Dropdown value=''  optionLabel="name" placeholder="Seleccione Componente" /></span><br/>
                     <br/>

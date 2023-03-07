@@ -8,6 +8,7 @@ import {classNames} from "primereact/utils";
 import './tableStyle.css';
 import {FaBus, FaCarCrash} from "react-icons/fa";
 import {GiRoad} from "react-icons/gi";
+import {Link, NavLink, Redirect, Route, useLocation} from "react-router-dom";
 
 
 
@@ -16,7 +17,9 @@ const Mantenimiento = () => {
 
     const [mixMantenimiento, setMixMantenimiento] = useState([]);
     const [selectedBus, setSelectedBus] = useState(null);
+    const [selectedCode, setSelectedCode] = useState(null);
     const [globalFilter, setGlobalFilter] = useState(null);
+    const [globalFilter2, setGlobalFilter2] = useState(null);
     const [totalBuses, SetTotalBuses] = useState({});
     const [busFS, setBusFS] = useState({});
     const [totalOdometer, setTotalOdometer] = useState({});
@@ -107,7 +110,9 @@ const Mantenimiento = () => {
     const actionBodyTemplate = (rowData) => {
         return (
 
-            <Button icon="pi pi-arrow-right" className="p-button-rounded p-button-info p-mr-2" />
+            <Link to={`/PerfilLink/`} state={rowData}><Button icon="pi pi-arrow-right" className="p-button-rounded p-button-info p-mr-2" ></Button></Link>
+
+            //<Button icon="pi pi-arrow-right" className="p-button-rounded p-button-info p-mr-2" ></Button>
         );
     }
 
@@ -120,8 +125,35 @@ const Mantenimiento = () => {
             </span>
         </div>
     );
+    const header2 = (
+        <div className="table-header">
+            <h5 className="p-m-0"> Lista Codigos Fusi Activos</h5>
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <InputText type="search" onInput={(e) => setGlobalFilter2(e.target.value)} placeholder="Buscar..." />
+            </span>
+        </div>
+    )
 
-    console.log(openFusi.length)
+    const statusBodyTemplate = (rowData) => {
+        return (
+            <Button  className="p-button-rounded p-button-success p-button-outlined" aria-label="Notification" >{rowData.estado}</Button>
+        )
+
+    }
+
+    const editBodyTemplate = (rowData) => {
+        return (
+            <Button icon="pi pi-pencil" className="p-button-rounded p-button-warning p-button-outlined" aria-label="Notification" />
+        )
+    }
+
+    const codeBodyTemplate = (rowData) => {
+        return (
+            <Button  className="p-button-rounded p-button-warning p-button-outlined" aria-label="Notification" >{rowData.fusi_code}</Button>
+        )
+    }
+
 
 
 
@@ -189,7 +221,7 @@ const Mantenimiento = () => {
                 </div>
 
 
-                <div className="col-12 md:col-9">
+                <div className="col-12 md:col-8">
                     <div className="card">
                         <DataTable value={mixMantenimiento}
                                    paginator
@@ -202,6 +234,7 @@ const Mantenimiento = () => {
                                    globalFilter={globalFilter}
                                    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink "
                                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" rows={15} >
+                            <Column field="id" header="ID" sortable />
                             <Column field="online" header="Online/Offline" headerStyle={{width:'5rem'}} body={onlineDataBodyTemplate}/>
                             <Column field="bus_name" header="Bus" sortable  />
                             <Column field="soc" header="Estado Carga" sortable body={socBodyTemplate} />
@@ -213,13 +246,23 @@ const Mantenimiento = () => {
                         </DataTable>
                     </div>
                 </div>
-                <div className="col-12 md:col-3">
+                <div className="col-12 md:col-4">
                     <div className="card">
-                        <DataTable value={openFusi}>
-                            <Column field="fusi_code" header="Codigo" />
-                            <Column field="bus" header="Bus" />
-                            <Column field='timestamp' header="Fecha" />
-                            <Column field='estado' header="Estado" />
+                        <DataTable value={openFusi}
+                                   header={header2}
+                                   globalFilter={globalFilter2}
+                                   paginator
+                                   responsiveLayout="scroll"
+                                   paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink "
+                                   currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" rows={14}
+                                   selectionMode="single"
+                                   selection = {selectedCode} onSelectionChange={e => setSelectedCode(e.value)} dataKey='bus'>
+                            <Column field="fusi_code" header="Codigo" body={codeBodyTemplate} />
+                            <Column field="bus" header="Bus" style={{fontWeight:"bold", color:"whitesmoke"}} />
+                            <Column field='timestamp' header="Fecha" sortable />
+                            <Column field='estado' header="Estado" body={statusBodyTemplate} />
+                            <Column header='Editar' body={editBodyTemplate} />
+
                         </DataTable>
 
 
