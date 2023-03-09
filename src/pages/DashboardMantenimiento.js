@@ -9,6 +9,7 @@ import './tableStyle.css';
 import {FaBus, FaCarCrash} from "react-icons/fa";
 import {GiRoad} from "react-icons/gi";
 import {Link, NavLink, Redirect, Route, useLocation} from "react-router-dom";
+import {Card} from "primereact/card";
 
 
 
@@ -221,7 +222,7 @@ const Mantenimiento = () => {
                 </div>
 
 
-                <div className="col-12 md:col-8">
+                <div className="col-12 md:col-9">
                     <div className="card">
                         <DataTable value={mixMantenimiento}
                                    paginator
@@ -234,7 +235,7 @@ const Mantenimiento = () => {
                                    globalFilter={globalFilter}
                                    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink "
                                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}" rows={15} >
-                            <Column field="id" header="ID" sortable />
+
                             <Column field="online" header="Online/Offline" headerStyle={{width:'5rem'}} body={onlineDataBodyTemplate}/>
                             <Column field="bus_name" header="Bus" sortable  />
                             <Column field="soc" header="Estado Carga" sortable body={socBodyTemplate} />
@@ -246,6 +247,24 @@ const Mantenimiento = () => {
                         </DataTable>
                     </div>
                 </div>
+
+                <div className="col-12 md:col-3">
+                    <div className="card"  >
+                        <Card title="Baterias 24 Volts">
+                            <h1 style={{fontSize:'2rem', textAlign:'center'}}>Proximamente [v]</h1>
+                            <h5 style={{textAlign:'center', color:'turquoise'}} >Ultima Medicion</h5>
+                        </Card>
+                    </div>
+
+                    <div className="card"  >
+                        <Card title="Baterias 24 Volts">
+                            <h1 style={{fontSize:'2rem', textAlign:'center'}}>Proximamente [v]</h1>
+                            <h5 style={{textAlign:'center', color:'turquoise'}} >Ultima Medicion</h5>
+                        </Card>
+                    </div>
+                </div>
+
+
                 <div className="col-12 md:col-4">
                     <div className="card">
                         <DataTable value={openFusi}

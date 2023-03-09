@@ -111,7 +111,7 @@ const Diccionario = () => {
                 </div>
 
                 <div className="col-12 md:col-3">
-                    <div className="card widget-overview-box widget-overview-box-1" style={{height:'55rem'}} >
+                    <div className="card" style={{height:'55rem'}} >
                         <Card title="Datos Generales"
                               subTitle='Cantidad Total Codigos De Falla'>
                             <h1 style={{fontSize:'6rem', textAlign:'center'}}>{totalFusiCodes}</h1>
